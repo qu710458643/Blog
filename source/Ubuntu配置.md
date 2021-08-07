@@ -70,3 +70,118 @@ zsh是一种专为交互使用而设计的shell，对Bourne shell做出了大量
    ```
 8. 刷新配置，使上述配置生效：`source ~/.zshrc`
 
+## 其他常用软件安装
+
+### LLVM安装
+[二进制安装](https://github.com/llvm/llvm-project/releases)
+### GCC源码编译安装
+
+1. GCC源码下载：[GitHub](https://github.com/gcc-mirror/gcc)
+   ```shell
+   git clone https://github.com/gcc-mirror/gcc.git
+   # 查看当前的tag
+   git tag -l
+   # 检出当前要编译的版本分支
+   git checkout releases/gcc-11.2.0
+   ```
+2. 必要工具安装
+   ```shell
+   sudo apt install flex
+   cd gcc
+   contrib/download_prerequisites
+   ```
+3. 配置编译选项
+   ```shell
+   mkdir build
+   cd build
+   ../configure -v --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc-11.2.0 --enable-checking=release --disable-multilib
+   ```
+4. 编译安装
+   ```shell
+   make -j4
+   # 需要在/usr/local中创建gcc-11.2.0目录，因此需要使用root权限。
+   sudo make install
+   ```
+5. 设置环境变量
+   ```shell
+   export PATH=/usr/local/gcc-11.2.0/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/gcc-11.2.0/lib64:$LD_LIBRARY_PATH
+   # 便于CMAKE获取到安装的GCC版本
+   export CC=/usr/local/gcc-11.2.0/bin/gcc
+   export CXX=/usr/local/gcc-11.2.0/bin/g++
+   export FC=/usr/local/gcc-11.2.0/bin/gfortran
+   ```
+
+### CMake编译安装
+1. 下载CMake源码：[下载地址](https://cmake.org/download/)
+2. 安装依赖库opensll,egl,vulkan:`sudo apt install libssl-dev libegl-dev libvulkan-dev`。
+3. 使用bootstrap工具完成配置:`./bootstrap --qt-gui --qt-qmake=where/is/qmake6`。
+4. 执行make。
+5. 使用root权限进行安装。
+
+### VSCode配置
+在Ubuntu的snap商店安装的版本可能会存在无法输入中文的问题，建议从官网下载deb包进行安装。
+#### VScode插件安装
+推荐使用的插件有：clangd，CodeLLDB，python，Markdown All In One,Latex WorkShop，GitLens,C++ TestMate,Cmake,CMake Tools，restructuredText等
+
+#### 代码片段配置
+VSCode提供了自定义配置代码片段的功能，基本的配置如下：
+
+1. C语言代码片段 
+   ```json
+   "Create c header file": {
+         "prefix": "CREATE_C_HEADER",
+         "body": [
+            "#ifndef _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H",
+            "#define _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H",
+            "#ifdef __cplusplus",
+            "extern \"C\" {",
+            "#endif",
+            "$0",
+            "#ifdef __cplusplus",
+            "}",
+            "#endif",
+            "#endif // _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
+         ],
+         "description": "Create c header file"
+      },
+      "Create c source file": {
+         "prefix": "CREATE_C_SOURCE",
+         "body": [
+            "#include \"${TM_FILENAME_BASE}.h\"",
+            "$0"
+         ],
+         "description": "Create c source file"
+      }
+   ```
+2. CPP语言代码片段 
+   ```json
+       "Create googletest cpp header": {
+        "prefix": "CREATE_GOOGLETEST_CPP_HEADER",
+        "body": [
+            "#include \"gtest/gtest.h\"",
+            "class ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}: public ::testing::Test {",
+            "protected:",
+            "   static void SetUpTestSuite()",
+            "    {",
+            "        std::cout << \"[**********] TestLeetcode Suite Set Up\" << std::endl;",
+            "    }",
+            "    static void TearDownTestSuite()",
+            "    {",
+            "        std::cout << \"[**********] TestLeetcode Suite Tear Down\" << std::endl;",
+            "    }",
+            "    virtual void SetUp()",
+            "    {",
+            "        // std::cout << \"TestLeetcode Case Set Up\" << std::endl;",
+            "    }",
+            "    virtual void TearDown()",
+            "    {",
+            "        // std::cout << \"TestLeetcode Case Tear Down\" << std::endl;",
+            "    }",
+            "",
+            "private:",
+            "};"
+        ],
+        "description": "Create googletest cpp header"
+    }
+   ```
