@@ -11,6 +11,7 @@ Welcome to 学习笔记's documentation!
    :caption: Contents:
 
    Ubuntu配置
+   LLVM学习笔记
 
 
 Indices and tables
