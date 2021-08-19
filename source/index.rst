@@ -7,8 +7,8 @@ Welcome to 学习笔记's documentation!
 ====================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
+   :caption: 目录:
 
    Ubuntu配置
    LLVM学习笔记

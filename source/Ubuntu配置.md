@@ -183,5 +183,21 @@ VSCode提供了自定义配置代码片段的功能，基本的配置如下：
             "};"
         ],
         "description": "Create googletest cpp header"
+    },
+    "Create googletest cpp source": {
+        "prefix": "CREATE_GOOGLETEST_CPP_SOURCE",
+        "body": [
+            "#include \"${TM_FILENAME_BASE}.hpp\"",
+            "#include \"${TM_FILENAME_BASE/test_(.*)/${1}/}.h\"",
+            "TEST_F(${TM_FILENAME_BASE/(.*)/${1:/upcase}/},case_01)",
+            "{",
+            "$0",
+            "}",
+            "TEST_F(${TM_FILENAME_BASE/(.*)/${1:/upcase}/},case_02)",
+            "{",
+            "$1",
+            "}"
+        ],
+        "description": "Create googletest cpp source"
     }
    ```
