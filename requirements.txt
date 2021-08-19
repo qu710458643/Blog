@@ -1,2 +1,5 @@
 myst_parser
 sphinxcontrib-mermaid
+sphinx-bootstrap-theme
+jieba
+sphinx-rtd-theme
