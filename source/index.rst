@@ -12,7 +12,7 @@ Welcome to 学习笔记's documentation!
 
    Ubuntu配置
    LLVM学习笔记
-
+   github加速
 
 Indices and tables
 ==================
