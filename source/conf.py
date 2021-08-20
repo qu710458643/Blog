@@ -60,3 +60,6 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_search_language = 'zh_CN'
+mermaid_params = ['--theme', 'forest', '--width', '600', '--backgroundColor', 'transparent']
+mermaid_verbose = True
+mermaid_output_format = "svg"
