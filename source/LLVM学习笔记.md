@@ -31,7 +31,7 @@
       B1 --> C[LLVM优化] 
       C --> D1[LLVM x86]
       A2[Fortran] --> B2[LLVM-GCC] 
-      B2 --> C 
+      B2 --> C
       C --> D2[LLVM PowerPC]
       A3[Haskell] --> B3[GHC] 
       B3 --> C 
