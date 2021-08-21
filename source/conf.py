@@ -68,6 +68,7 @@ mermaid_params = [
     "--backgroundColor",
     "transparent",
 ]
+mermaid_output_format="png"
 mermaid_verbose = True
 latex_documents = [
     ("index", "Sphinx-Note.tex", project, author, "manual"),

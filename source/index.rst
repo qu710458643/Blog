@@ -13,6 +13,7 @@ Welcome to 学习笔记's documentation!
    Ubuntu配置
    LLVM学习笔记
    Github加速
+   mermaid教程
 
 Indices and tables
 ==================
